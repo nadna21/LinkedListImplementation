@@ -18,7 +18,6 @@ public:
 	LinkedList() {
 		head = NULL; 
 		tail = NULL;
-
 	}
 
 	void addElementBack(int value);
@@ -26,9 +25,7 @@ public:
 	void addAtIndex(int index, int value);
 	void print();
 	void search(int value);
-
 };
-
 
 void LinkedList::addElementBack(int value) {
 	List* newPtr = new List();
@@ -36,7 +33,7 @@ void LinkedList::addElementBack(int value) {
 	newPtr->ptr = NULL;
 
 
-	if (head == NULL) {            // chacking for no element is added before
+	if (head == NULL) {            // checking for no element is added before
 		head = newPtr;
 		tail = newPtr;
 		std::cout << "Element added" << std::endl;
@@ -93,24 +90,35 @@ void LinkedList::addAtIndex(int index, int value) {
 			if (current == NULL) {
 				std::cout << "Invalid position" << std::endl;
 				return;
-
 			}
 		}
-
 		previous->ptr = newPtr;
 		newPtr->ptr = current;
 	}
-
 }
 
 void LinkedList::print() {
 	List* current;
 	current = head;
 	while (current != NULL) {
-		std::cout << current->value<<" ";
+		std::cout << current->value << " " ;
 		current = current->ptr;
 	}
 }
+void LinkedList::search(int value) {
+	List* current;
+	current = head;
+
+	while (current != NULL) {
+		if (current->value == value) {
+			std::cout << "\n Element " << value << " found" << std::endl;
+			return;
+		}
+		current = current->ptr;
+	}
+	std::cout << "\n Element " << value << " not found" << std::endl;
+}
+
 int main() {
 
 	LinkedList list;
@@ -120,6 +128,7 @@ int main() {
 	list.addElementFront(22);
 	list.addAtIndex(4, 34);
 	list.print();
+	list.search(34);
 	
 	
 	}
