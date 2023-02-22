@@ -129,7 +129,5 @@ int main() {
 	list.addAtIndex(4, 34);
 	list.print();
 	list.search(34);
-	
-	
-	}
+}
 
