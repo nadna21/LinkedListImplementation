@@ -20,12 +20,24 @@ public:
 		tail = NULL;
 	}
 
+	~LinkedList();
+
 	void addElementBack(int value);
 	void addElementFront(int value);
 	void addAtIndex(int index, int value);
 	void print();
 	void search(int value);
+	void deleteList(int value);
 };
+
+LinkedList::~LinkedList() {
+	List* current;
+	current = head;
+	while (current != NULL) {
+		List* next = current->ptr;   
+		current = next;
+	}
+}
 
 void LinkedList::addElementBack(int value) {
 	List* newPtr = new List();
@@ -45,8 +57,6 @@ void LinkedList::addElementBack(int value) {
 		return;
 	}
 }
-
-
 
 void LinkedList::addElementFront(int value) {
 	List* newPtr = new List();
@@ -119,6 +129,51 @@ void LinkedList::search(int value) {
 	std::cout << "\n Element " << value << " not found" << std::endl;
 }
 
+
+void LinkedList::deleteList(int value) {
+	List* current = new List();
+	List* previous = new List();
+	current = head;
+	previous = head;
+	bool count = false;
+
+	while (current != NULL) {
+		if (value == current->value and current == head) {
+			head = current->ptr;
+			delete(current);
+			count = true;
+			break;
+		}
+		else if (current->value == value) {
+			previous->ptr = current->ptr;
+			if (current == tail) {
+				tail = previous;
+				
+			}
+
+			delete(current);
+			count = true;
+			break;
+		}
+			
+		else {
+				previous = current;
+				current = current->ptr;
+				break;
+
+		}
+		
+
+	}
+	if (count == true) {
+		std::cout << "Element deleted" << std::endl;
+	}
+	else {
+		std::cout << "Element not found" << std::endl;
+	}
+}
+
+
 int main() {
 
 	LinkedList list;
@@ -127,7 +182,6 @@ int main() {
 	list.addElementFront(15);
 	list.addElementFront(22);
 	list.addAtIndex(4, 34);
-	list.print();
-	list.search(34);
+	list.deleteList(24);
+	
 }
-
